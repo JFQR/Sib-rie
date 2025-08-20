@@ -6,15 +6,15 @@ import Navbar from "./Navbar"
 import Content from "./Content"
 import Footer from "./Footer"
 import OneImage from './ComplementComponents/OneImage'
+import Chat from "./ComplementComponents/Chat"
 
 import axios from "axios"
 
-import { Rating } from 'primereact/rating';
 import { FloatLabel } from 'primereact/floatlabel';
 import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
 import { Password } from 'primereact/password';
-import { Checkbox } from 'primereact/checkbox';
+
 
 function MyAccount(){
 
@@ -23,7 +23,12 @@ function MyAccount(){
     const [ iveSold, setIveSold ] = useState()
     const [ onStock, setOnStock ] = useState()
     const [ iveBought, setIveBought ] = useState()
+    //emails are people who bought, sellerEmails are people who sold products to the account
     const [ emails, setEmails] = useState([])
+    const [ sellerEmails, setSellerEmails] = useState([])
+
+    const [ seeChat, setSeeChat ] = useState(false)
+    const [ requiredInfo, setRequiredInfo ] = useState()
     //const [ checked, setChecked ] = useState(false)
 
     const [formData, setFormData] = useState({
@@ -41,9 +46,6 @@ function MyAccount(){
 
     useEffect(()=>{
 
-        let userId = localStorage.getItem('userId')
-
-        if(userId){
             Promise.all([
 
                 axios.get(`http://localhost:8000/money/sells-user/${userId}/`),
@@ -72,15 +74,26 @@ function MyAccount(){
                     });
 
                 }
+                //if we've bought something we need to contact the person who sold us, 
+                // so we are retrieving their email:
+                if(boughts.data.length !== 0 ){
+                    
+                    let myPurchases = boughts.data
+                    
+                    myPurchases.forEach( bought => {
 
+                        axios.get(`http://localhost:8000/user/user/${bought.old_id_user}/`).then(res =>{
+                            setSellerEmails(prev => [...prev, res.data.email])
+                        }).catch(err => {
+                            console.error(err)
+                        })
+                    });
+
+                }
             }).catch(error=>{
                 console.error("error at retrieving data: ",error)
                 alert("An error occured aat retrieving your data.")
             })
-        }else{
-            alert("You are not logged")
-            navigate("/")
-        }
     },[])
 
     const handleSubmit = async (e) => {
@@ -117,6 +130,12 @@ function MyAccount(){
         navigate("/")
     }
 
+    function startChat(email, customerId, userId){
+        
+        setRequiredInfo({email:email, customerId:customerId, userId:userId})
+        setSeeChat(true)
+    }
+
     function updateStatus(event, id){
 
         axios.patch(`http://localhost:8000/money/update/sell/${id}/`,
@@ -131,7 +150,10 @@ function MyAccount(){
             alert("Failed to update status!")
         })
     }
-    
+    function closeChat(){
+        setSeeChat(false)
+    }
+
     return(
         <>  
             <Navbar/>
@@ -139,6 +161,7 @@ function MyAccount(){
 
             <div className="general-container">
                 <h1>Update my info.</h1>
+
                 <form onSubmit={handleSubmit}>
                     <FloatLabel>
                         <InputText id="name" type="text" required value={formData.name} 
@@ -178,11 +201,16 @@ function MyAccount(){
                 <h1>What I've bought</h1>
 
                 <div className="my-products-container">
-                    {iveBought?.length > 0 ? (iveBought?.map((bought)=>{return(
+                    {iveBought?.length > 0 ? (iveBought?.map((bought,index)=>{return(<div className="sold-container">
                         <Link to={`/buyproduct/${bought.product.idproduct}?mode=${bought.status ? "rating" : "norating"}`}>
-                        - {bought.product.title}
+                        ► {bought.product.title}
                         </Link>
-                    )})):<p>No products bought</p>}
+                        <h3 
+                            style={{cursor:"pointer"}} 
+                            onClick={ ()=> startChat(sellerEmails[index], bought.old_customer, bought.old_id_user) }
+                        >contact with: {sellerEmails[index]}
+                        </h3>
+                    </div>)})):<p>No products bought</p>}
                 </div>
 
 
@@ -195,10 +223,19 @@ function MyAccount(){
                             <Link to = {`/myproduct/${sold.product.idproduct}`}>
                                 ► {sold.product.title}
                             </Link>
-                            <h3>contact with: {emails[index]}</h3>
+
+                            <h3 
+                                style={{cursor:"pointer"}} 
+                                onClick={ ()=> startChat(emails[index], sold.old_customer, sold.old_id_user) }
+                            >contact with: {emails[index]}
+                            </h3>
+
                             {sold.status == true ? (
                                 <>
-                                    <label for = {`product${sold.product.idproduct}`}>Delivered and payed?</label>
+                                    <label for = {`product${sold.product.idproduct}`}>
+                                            Delivered and payed?
+                                    </label>
+
                                     <input onChange = {e => updateStatus(e.target.checked, sold.idsell)} 
                                         type = "checkbox" 
                                         name = {`product${sold.idsell}`}
@@ -219,6 +256,7 @@ function MyAccount(){
                     )})):<p>No products sold</p>}
                 </div>
             </div>
+            {seeChat && <Chat usersInfo={requiredInfo} closeSignal={closeChat}/>}
             <Footer/>
         </>
 

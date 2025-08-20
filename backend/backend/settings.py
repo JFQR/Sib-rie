@@ -34,6 +34,8 @@ INSTALLED_APPS = [
     'people',
     'money',
     'product',
+    'chat',
+    'channels',
 ]
 
 #CORS_ALLOW_ALL_ORIGINS = True 
@@ -111,6 +113,15 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+ASGI_APPLICATION = 'backend.asgi.application'
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer"
+    }
+}
+
 
 LANGUAGE_CODE = 'en-us'
 

@@ -33,7 +33,7 @@ function Navbar(){
                     {existsUser !==null && (<li><Link to = "/myproduct">Sell product</Link></li>)}
                 </ul>
             </nav>
-                {existsUser !== null &&(
+                {existsUser &&(
                     <Link to="/myaccount" className="profile-circule">
                         {picture ?(
                             <Link to="/myaccount"><img src={picture}></img></Link>

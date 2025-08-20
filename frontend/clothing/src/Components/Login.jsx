@@ -94,7 +94,7 @@ function Login(){
 
     function handleLogin(){
 
-        let userExists = localStorage.getItem("name")
+        let userExists = localStorage.getItem("access")
         
         if(userExists != null){
             //if they exist log them out:

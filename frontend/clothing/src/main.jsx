@@ -9,7 +9,7 @@ import 'primereact/resources/primereact.min.css';
 //import 'primeicons/primeicons.css';
 import './index.css'
 
-//import {AuthProvider} from './Components/Context'
+import ProtectedRoutes from './Components/ProtectedRoute';
 import MainMenu from './Components/MainMenu';
 import MyAccount from './Components/MyAccount';
 import MyProduct from './Components/MyProduct'
@@ -28,11 +28,11 @@ const router = createBrowserRouter([
   },
   {
     path:"/myaccount",
-    element:<MyAccount/>
+    element:<ProtectedRoutes><MyAccount/></ProtectedRoutes>
   },
   {
     path:"/myproduct",
-    element:<MyProduct/>
+    element:<ProtectedRoutes><MyProduct/></ProtectedRoutes>
   },
   {
     path:"/myproduct/:idproduct",
@@ -75,9 +75,9 @@ const router = createBrowserRouter([
 ])
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
+
     <PrimeReactProvider value={{ ripple: true }}>
       <RouterProvider router={router} />
     </PrimeReactProvider>
-  </StrictMode>,
+
 )

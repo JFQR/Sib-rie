@@ -191,7 +191,6 @@ async function update() {
     }
 }
 
-//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^IF THE USER WANTS TO UPDATE A PRODUCT^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     const onSubmit = async (data) => {
 
         const formData = new FormData();

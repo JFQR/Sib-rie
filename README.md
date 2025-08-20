@@ -1,4 +1,4 @@
-> Spanish
+> --------------------------Spanish
 # Sibérie
 
 ## Un proyecto de práctica, un sitio web para vender ropa de segunda mano.
@@ -28,11 +28,14 @@ El primer paso sería clonar el proyecto desde github y seguir:
 
 # Trabajo en progreso y problemas conocidos.
 * Se sigue trabajando en la posibilidad de actualizar un producto
-* Hay ciertos bugs como que no se muestran las immágenes al crear un nuevo producto
-* Un chat para la interacción vendedor-comprador sea implementada.
+* Hay ciertos bugs como que no se muestran las imágenes al crear un nuevo producto
 * Si un bug es encontrado, mandar un issue en el la sección correspondiente
 
-> English
+# Segundo commit:
+* Un chat para la interacción entre comprador y vendedor
+* Implementación de rutas protegidas
+
+> --------------------------English
 # Sibérie
 
 ## A practice project, a website to sell second hand clothes.
@@ -63,5 +66,8 @@ The first step is to clone this proyect and follow these steps:
 # Work in progress and known issues.
 * As of today, the developer is working in the possibility of updating a product.
 * There are some bugs like images not showing while creating a publication or the searchbar showing duplicates of products.
-* A chat for buyer-purchaser will be implemented.
 * If you've found a bug, please, submit an issue in the corresponding tab.
+
+# Second commit:
+* A chat for the interaction between seller and buyer was implemented
+* Protected routes were implemented
