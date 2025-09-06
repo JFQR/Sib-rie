@@ -58,11 +58,6 @@ The first step is to clone this proyect and follow these steps:
 * Go to frontend>clothing and execute npm install and then npm run dev
 * Go to http://localhost:5173 in a browser.
 
-# Work in progress and known issues.
-* As of today, the developer is working in the possibility of updating a product.
-* There are some bugs like images not showing while creating a publication or the searchbar showing duplicates of products.
-* If you've found a bug, please, submit an issue in the corresponding tab.
-
 # Second commit:
 * A chat for the interaction between seller and buyer was implemented
 * Protected routes were implemented
