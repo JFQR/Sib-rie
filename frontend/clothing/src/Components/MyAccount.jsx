@@ -43,37 +43,37 @@ function MyAccount(){
             img: [file],
         }));
     };
-
+    let userId = localStorage.getItem("userId")
     useEffect(()=>{
 
-            Promise.all([
+        Promise.all([
 
-                axios.get(`http://localhost:8000/money/sells-user/${userId}/`),
-                axios.get(`http://localhost:8000/product/myproducts/${userId}/`),
-                axios.get(`http://localhost:8000/money/purchase-user/${userId}/`),
+            axios.get(`http://localhost:8000/money/sells-user/${userId}/`),
+            axios.get(`http://localhost:8000/product/myproducts/${userId}/`),
+            axios.get(`http://localhost:8000/money/purchase-user/${userId}/`),
 
-            ]).then(([sells,myProducts,boughts])=>{
+        ]).then(([sells,myProducts,boughts])=>{
 
-                setOnStock(myProducts.data)
-                setIveSold(sells.data)
-                setIveBought(boughts.data)
+            setOnStock(myProducts.data)
+            setIveSold(sells.data)
+            setIveBought(boughts.data)
 
-                //if we have sells we need to contact the person who bought, 
-                // so we are retrieving their email:
-                if(sells.data.length !== 0 ){
+            //if we have sells we need to contact the person who bought, 
+            // so we are retrieving their email:
+            if(sells.data.length !== 0 ){
                     
-                    let mySells = sells.data
+                let mySells = sells.data
                     
-                    mySells.forEach( sell => {
+                mySells.forEach( sell => {
 
-                        axios.get(`http://localhost:8000/user/user/${sell.old_customer}/`).then(res =>{
-                            setEmails(prev => [...prev, res.data.email])
-                        }).catch(err => {
-                            console.error(err)
-                        })
-                    });
+                    axios.get(`http://localhost:8000/user/user/${sell.old_customer}/`).then(res =>{
+                        setEmails(prev => [...prev, res.data.email])
+                    }).catch(err => {
+                        console.error(err)
+                    })
+                });
 
-                }
+            }
                 //if we've bought something we need to contact the person who sold us, 
                 // so we are retrieving their email:
                 if(boughts.data.length !== 0 ){

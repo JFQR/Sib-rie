@@ -26,11 +26,6 @@ El primer paso sería clonar el proyecto desde github y seguir:
 * Ir a frontend>clothing y ejecutar npm install y luego npm run dev
 * Ir a http://localhost:5173 en un navegador
 
-# Trabajo en progreso y problemas conocidos.
-* Se sigue trabajando en la posibilidad de actualizar un producto
-* Hay ciertos bugs como que no se muestran las imágenes al crear un nuevo producto
-* Si un bug es encontrado, mandar un issue en el la sección correspondiente
-
 # Segundo commit:
 * Un chat para la interacción entre comprador y vendedor
 * Implementación de rutas protegidas

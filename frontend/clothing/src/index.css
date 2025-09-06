@@ -314,6 +314,17 @@ gap:1rem;
   gap:1.5rem;
 }
 /*---------------------------manyimages*/
+.img-label-button{
+  background-color: #14b8a6;
+  border-radius: 8px;
+  color:white;
+  border:none;
+  padding:0.2rem;
+  
+}
+.img-label-button:hover{
+  background-color: red;
+}
 .gerer-images{
     display: inline-block;
     justify-content: center;

@@ -43,7 +43,7 @@ class ProductDestroyAPIView(generics.DestroyAPIView):
     queryset = Product.objects.all()
 
 class ImgsDeleteAPIView(generics.DestroyAPIView):
-    lookup_field="id"
+    lookup_field="id_imgProduct"
     queryset = ImagesProduct.objects.all()
 
 class ColoursListAPIView(generics.ListAPIView):

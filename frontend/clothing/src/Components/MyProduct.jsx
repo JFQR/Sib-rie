@@ -13,8 +13,7 @@ import Navbar from './Navbar'
 import Content from './Content'
 import Footer from './Footer'
 import TagsDropdowns from './ComplementComponents/TagsDropdowns';
-//import SeveralImages from './ComplementComponents/SeveralImages';
-import ManyImages from './ComplementComponents/ManyImages';
+import SeveralImages from './ComplementComponents/SeveralImages';
 import { Button } from 'primereact/button';
 
 
@@ -147,7 +146,7 @@ async function update() {
                 const file = await urlToFile(img.src, `image_${index}.png`);
                 return { ...img, file };
             } else if (img instanceof File) {
-                return { file: img }; // por si viene directo del input file
+                return { file: img }
             }
             return img;
         })
@@ -273,7 +272,7 @@ async function update() {
 
     function takeImgs(files){
         setImgs(files)
-        setShowGalleria(true)
+        console.log("imgs recieved in the parent: ",imgs)
     }
 
     function recieveTags(tags){
@@ -282,10 +281,7 @@ async function update() {
             ...tags
         }));
     }
-    function ver(){
-        //console.log(extImgs)
-        console.log("prod",extProduct)
-    }
+    
     return(
         <>
             <Navbar/>
@@ -343,8 +339,10 @@ async function update() {
                 </form>
                 {extProduct && (<Button onClick={update} label="Update" />)}  
                 {extProduct && (<Button onClick={destroy} label="Delete product" />)}   
-                {!imgs && (<ManyImages ImgsToSend={ takeImgs }/>)}
-                {imgs && (<ManyImages ImgsToRecieve={ imgs } />)}
+                <SeveralImages
+                    ImgsToSend={takeImgs}
+                    ImgsToRecieve={imgs}
+                />
 
             </div>
             <Footer/>

@@ -21,7 +21,7 @@ urlpatterns = [
 
     path('images/<int:id_product>/', views.ImagesByProductAPIView.as_view(), name='update-images'),
     path('update/imgs/<int:id_imgProduct>/', views.UpdateImagesByProductAPIView.as_view(), name='product-images'),
-    path('delete/img/<int:id>/', views.ImgsDeleteAPIView.as_view()),
+    path('delete/img/<int:id_imgProduct>/', views.ImgsDeleteAPIView.as_view()),
     path("create/imgs/", views.ImgsCreateAPIView.as_view(),name="create_images"),
 
     path('colours/', views.ColoursListAPIView.as_view()),

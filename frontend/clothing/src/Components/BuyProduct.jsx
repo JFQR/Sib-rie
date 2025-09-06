@@ -265,9 +265,9 @@ function BuyProduct(){
             <div className="card flex justify-content-center">
                 <Dialog header="Instructions" visible={visible} style={{ width: '50vw' }} onHide={() => {if (!visible) return; setVisible(false); }}>
                     <p className="m-0">
-                        Congratulations! Now the owner is going to talk to you or you can talk to them.
-                        To chat with them, you just have to click on the section "Sold by", in their profile
-                        you'll see a button to start the chat.
+                        Congratulations! Now you can go to your account and click on the product you bought.
+                        A chat with the seller will open and you'll be able to chat w/them. Remember to open it
+                        regularely to know if there's another message.
                     </p>
                 </Dialog>
             </div>
