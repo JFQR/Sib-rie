@@ -28,22 +28,21 @@ const router = createBrowserRouter([
   },
   {
     path:"/myaccount",
-    element:<ProtectedRoutes><MyAccount/></ProtectedRoutes>
+    element:
+      <ProtectedRoutes>
+        <MyAccount/>
+      </ProtectedRoutes>
   },
   {
     path:"/myproduct",
-    element:<ProtectedRoutes><MyProduct/></ProtectedRoutes>
+    element:<ProtectedRoutes>
+              <MyProduct/>
+            </ProtectedRoutes>
   },
   {
     path:"/myproduct/:idproduct",
     element:<MyProduct/>
   },
-  /*
-  {
-    path:"/buyproduct/:idproduct?=update",
-    element:<BuyProduct/>
-  },
-  */
   {
     path:"/buyproduct/:idproduct",
     element:<BuyProduct/>

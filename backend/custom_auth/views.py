@@ -94,11 +94,7 @@ class LogoutView(APIView):
             print("Error loggin out:", str(e))
             return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
-#Checks in settings.py AUTH_USER_MODEL which contains which model is the responsible to 
-#store users:
 User = get_user_model()
-#~this will allow to fetch any user w/o authentification
-#because we need to be able to get any user's email
 class UserDetailView(APIView):
     permission_classes = [AllowAny]
 

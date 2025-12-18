@@ -148,3 +148,4 @@ class SellDestroyAPIView(generics.DestroyAPIView):
     lookup_field="idsell"
     queryset=Sells.objects.all()
     serializer_class=SellListSerializer
+

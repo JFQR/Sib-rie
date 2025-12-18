@@ -4,6 +4,7 @@
 import { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form';
 import { useParams, useNavigate } from 'react-router-dom'
+
 import axios from 'axios'
 
 import { z } from 'zod';
@@ -62,7 +63,7 @@ function MyProduct(){
             email: "test@email.com",
         },
         resolver: zodResolver(schema),
-    });
+    })
 //vvvvvvvvvvvvvvvvvvvvvvvvvvvvvv-IF THE USER WANTS TO UPDATE A PRODUCT:-vvvvvvvvvvvvvvvvvvvvvvvvvv
     const { idproduct } = useParams()
     const navigate = useNavigate()

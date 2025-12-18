@@ -14,10 +14,6 @@ function SeveralImages({ImgsToSend, ImgsToRecieve}){
         
     },[ImgsToRecieve])
 
-    function ver(){
-        console.log(existingImgs)
-
-    }
 
     function openExplorer() {
         fileInputRef.current.click()
@@ -46,7 +42,6 @@ function SeveralImages({ImgsToSend, ImgsToRecieve}){
     }
     return(
         <div style={{display:"wrap", maxWidth:"300px"}}>
-            <button onClick={ver}>ver</button>
             <input type="file" 
                 accept=".jpg,.png,.jpeg"
                 multiple
